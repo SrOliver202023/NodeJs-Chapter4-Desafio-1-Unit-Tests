@@ -1,3 +1,6 @@
-import { createConnection } from 'typeorm';
+import { createConnection, getConnectionOptions, ConnectionOptions } from 'typeorm';
 
-(async () => await createConnection())();
+(async () => {
+  const createConnectionOptions: ConnectionOptions = await getConnectionOptions();
+  await createConnection(Object.assign(createConnectionOptions, { host: process.env.DB_HOST }));
+})();
